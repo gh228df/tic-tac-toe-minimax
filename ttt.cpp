@@ -4,444 +4,75 @@ using namespace std;
 
 bool checkwin(short pos, short last)
 {
+	pos = ~pos;
 	switch (last)
 	{
 	case 0:
-		if ((pos & 272) == 272)
+		if ((pos & 272) == 0)
 			return true;
-		if ((pos & 72) == 72)
+		if ((pos & 72) == 0)
 			return true;
-		if ((pos & 6) == 6)
+		if ((pos & 6) == 0)
 			return true;
 		return false;
 	case 1:
-		if ((pos & 5) == 5)
+		if ((pos & 5) == 0)
 			return true;
-		if ((pos & 144) == 144)
+		if ((pos & 144) == 0)
 			return true;
 		return false;
 	case 2:
-		if ((pos & 3) == 3)
+		if ((pos & 3) == 0)
 			return true;
-		if ((pos & 288) == 288)
+		if ((pos & 288) == 0)
 			return true;
-		if ((pos & 80) == 80)
+		if ((pos & 80) == 0)
 			return true;
 		return false;
 	case 3:
-		if ((pos & 48) == 48)
+		if ((pos & 48) == 0)
 			return true;
-		if ((pos & 65) == 65)
+		if ((pos & 65) == 0)
 			return true;
 		return false;
 	case 4:
-		if ((pos & 40) == 40)
+		if ((pos & 40) == 0)
 			return true;
-		if ((pos & 130) == 130)
+		if ((pos & 130) == 0)
 			return true;
-		if ((pos & 257) == 257)
+		if ((pos & 257) == 0)
 			return true;
-		if ((pos & 68) == 68)
+		if ((pos & 68) == 0)
 			return true;
 		return false;
 	case 5:
-		if ((pos & 260) == 260)
+		if ((pos & 260) == 0)
 			return true;
-		if ((pos & 24) == 24)
+		if ((pos & 24) == 0)
 			return true;
 		return false;
 	case 6:
-		if ((pos & 384) == 384)
+		if ((pos & 384) == 0)
 			return true;
-		if ((pos & 9) == 9)
+		if ((pos & 9) == 0)
 			return true;
-		if ((pos & 20) == 20)
+		if ((pos & 20) == 0)
 			return true;
 		return false;
 	case 7:
-		if ((pos & 320) == 320)
+		if ((pos & 320) == 0)
 			return true;
-		if ((pos & 18) == 18)
+		if ((pos & 18) == 0)
 			return true;
 		return false;
 	case 8:
-		if ((pos & 192) == 192)
+		if ((pos & 192) == 0)
 			return true;
-		if ((pos & 17) == 17)
+		if ((pos & 17) == 0)
 			return true;
-		if ((pos & 36) == 36)
+		if ((pos & 36) == 0)
 			return true;
 		return false;
-	}
-}
-
-short minimax(short depth, short alpha, short beta, short position1, short position2, bool player){
-	short tpos = ~(position1 | position2); 
-	if (player)
-	{
-		if ((tpos & 1) > 0) 
-		{
-			if ((position1 & 272) == 272)
-				return depth;
-			if ((position1 & 72) == 72)
-				return depth;
-			if ((position1 & 6) == 6)
-				return depth;
-		}
-		if ((tpos & 2) > 0)
-		{
-			if ((position1 & 5) == 5)
-				return depth;
-			if ((position1 & 144) == 144)
-				return depth;
-		}
-		if ((tpos & 4) > 0)
-		{
-			if ((position1 & 3) == 3)
-				return depth;
-			if ((position1 & 288) == 288)
-				return depth;
-			if ((position1 & 80) == 80)
-				return depth;
-		}
-		if ((tpos & 8) > 0)
-		{
-			if ((position1 & 48) == 48)
-				return depth;
-			if ((position1 & 65) == 65)
-				return depth;
-		}
-		if ((tpos & 16) > 0)
-		{
-			if ((position1 & 40) == 40)
-				return depth;
-			if ((position1 & 130) == 130)
-				return depth;
-			if ((position1 & 257) == 257)
-				return depth;
-			if ((position1 & 68) == 68)
-				return depth;
-		}
-		if ((tpos & 32) > 0)
-		{
-			if ((position1 & 260) == 260)
-				return depth;
-			if ((position1 & 24) == 24)
-				return depth;
-		}
-		if ((tpos & 64) > 0)
-		{
-			if ((position1 & 384) == 384)
-				return depth;
-			if ((position1 & 9) == 9)
-				return depth;
-			if ((position1 & 20) == 20)
-				return depth;
-		}
-		if ((tpos & 128) > 0)
-		{
-			if ((position1 & 320) == 320)
-				return depth;
-			if ((position1 & 18) == 18)
-				return depth;
-		}
-		if ((tpos & 256) > 0)
-		{
-			if ((position1 & 192) == 192)
-				return depth;
-			if ((position1 & 17) == 17)
-				return depth;
-			if ((position1 & 36) == 36)
-				return depth;
-		}
-		short maxscore = depth - 3;
-		if(alpha > maxscore)
-			return alpha;
-		depth--;
-		if(depth == 0)
-			return 0;
-		if ((tpos & 16) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 16, position2, false);
-			if(reschild > maxscore)
-				return reschild;
-			if(reschild > alpha){
-				if(beta <= reschild)
-					return reschild;
-				alpha = reschild;
-			}
-		}
-		if ((tpos & 256) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 256, position2, false);
-			if(reschild > maxscore)
-				return reschild;
-			if(reschild > alpha){
-				if(beta <= reschild)
-					return reschild;
-				alpha = reschild;
-			}
-		}
-		if ((tpos & 64) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 64, position2, false);
-			if(reschild > maxscore)
-				return reschild;
-			if(reschild > alpha){
-				if(beta <= reschild)
-					return reschild;
-				alpha = reschild;
-			}
-		}
-		if ((tpos & 4) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 4, position2, false);
-			if(reschild > maxscore)
-				return reschild;
-			if(reschild > alpha){
-				if(beta <= reschild)
-					return reschild;
-				alpha = reschild;
-			}
-		}
-		if ((tpos & 1) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 1, position2, false);
-			if(reschild > maxscore)
-				return reschild;
-			if(reschild > alpha){
-				if(beta <= reschild)
-					return reschild;
-				alpha = reschild;
-			}
-		}
-		if ((tpos & 128) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 128, position2, false);
-			if(reschild > maxscore)
-				return reschild;
-			if(reschild > alpha){
-				if(beta <= reschild)
-					return reschild;
-				alpha = reschild;
-			}
-		}
-		if ((tpos & 32) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 32, position2, false);
-			if(reschild > maxscore)
-				return reschild;
-			if(reschild > alpha){
-				if(beta <= reschild)
-					return reschild;
-				alpha = reschild;
-			}
-		}
-		if ((tpos & 8) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 8, position2, false);
-			if(reschild > maxscore)
-				return reschild;
-			if(reschild > alpha){
-				if(beta <= reschild)
-					return reschild;
-				alpha = reschild;
-			}
-		}
-		if ((tpos & 2) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 2, position2, false);
-			if(reschild > maxscore)
-				return reschild;
-			if(reschild > alpha){
-				if(beta <= reschild)
-					return reschild;
-				alpha = reschild;
-			}
-		}
-		return alpha;
-	}
-	else
-	{
-		if ((tpos & 1) > 0)
-		{
-			if ((position2 & 272) == 272)
-				return -depth;
-			if ((position2 & 72) == 72)
-				return -depth;
-			if ((position2 & 6) == 6)
-				return -depth;
-		}
-		if ((tpos & 2) > 0)
-		{
-			if ((position2 & 5) == 5)
-				return -depth;
-			if ((position2 & 144) == 144)
-				return -depth;
-		}
-		if ((tpos & 4) > 0)
-		{
-			if ((position2 & 3) == 3)
-				return -depth;
-			if ((position2 & 288) == 288)
-				return -depth;
-			if ((position2 & 80) == 80)
-				return -depth;
-		}
-		if ((tpos & 8) > 0)
-		{
-			if ((position2 & 48) == 48)
-				return -depth;
-			if ((position2 & 65) == 65)
-				return -depth;
-		}
-		if ((tpos & 16) > 0)
-		{
-			if ((position2 & 40) == 40)
-				return -depth;
-			if ((position2 & 130) == 130)
-				return -depth;
-			if ((position2 & 257) == 257)
-				return -depth;
-			if ((position2 & 68) == 68)
-				return -depth;
-		}
-		if ((tpos & 32) > 0)
-		{
-			if ((position2 & 260) == 260)
-				return -depth;
-			if ((position2 & 24) == 24)
-				return -depth;
-		}
-		if ((tpos & 64) > 0)
-		{
-			if ((position2 & 384) == 384)
-				return -depth;
-			if ((position2 & 9) == 9)
-				return -depth;
-			if ((position2 & 20) == 20)
-				return -depth;
-		}
-		if ((tpos & 128) > 0)
-		{
-			if ((position2 & 320) == 320)
-				return -depth;
-			if ((position2 & 18) == 18)
-				return -depth;
-		}
-		if ((tpos & 256) > 0)
-		{
-			if ((position2 & 192) == 192)
-				return -depth;
-			if ((position2 & 17) == 17)
-				return -depth;
-			if ((position2 & 36) == 36)
-				return -depth;
-		}
-		short minscore = 3 - depth;
-		if(beta < minscore)
-			return beta;
-		depth--;
-		if ((tpos & 16) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 16, true);
-			if(reschild < minscore)
-				return reschild;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return reschild;
-				beta = reschild;
-			}
-		}
-		if ((tpos & 256) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 256, true);
-			if(reschild < minscore)
-				return reschild;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return reschild;
-				beta = reschild;
-			}
-		}
-		if ((tpos & 64) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 64, true);
-			if(reschild < minscore)
-				return reschild;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return reschild;
-				beta = reschild;
-			}
-		}
-		if ((tpos & 4) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 4, true);
-			if(reschild < minscore)
-				return reschild;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return reschild;
-				beta = reschild;
-			}
-		}
-		if ((tpos & 1) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 1, true);
-			if(reschild < minscore)
-				return reschild;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return reschild;
-				beta = reschild;
-			}
-		}
-		if ((tpos & 128) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 128, true);
-			if(reschild < minscore)
-				return reschild;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return reschild;
-				beta = reschild;
-			}
-		}
-		if ((tpos & 32) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 32, true);
-			if(reschild < minscore)
-				return reschild;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return reschild;
-				beta = reschild;
-			}
-		}
-		if ((tpos & 8) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 8, true);
-			if(reschild < minscore)
-				return reschild;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return reschild;
-				beta = reschild;
-			}
-		}
-		if ((tpos & 2) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 2, true);
-			if(reschild < minscore)
-				return reschild;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return reschild;
-				beta = reschild;
-			}
-		}
-		return beta;
 	}
 }
 
@@ -479,391 +110,473 @@ void display(short pos1, short pos2)
 	}
 }
 
-short minimaxmain(short depth, short alpha, short beta, short position1, short position2, bool player)
-{
-	short tpos = ~(position1 | position2); 
+int entry = 0;
+
+short minimax(short depth, short alpha, short beta, short position1, short position2, bool player){
+	entry++;
+	short tpos = (position1 | position2), npos; 
 	if (player)
 	{
-		if ((tpos & 1) > 0) 
-		{
-			if ((position1 & 272) == 272)
-				return 0;
-			if ((position1 & 72) == 72)
-				return 0;
-			if ((position1 & 6) == 6)
-				return 0;
-		}
-		if ((tpos & 2) > 0)
-		{
-			if ((position1 & 5) == 5)
-				return 1;
-			if ((position1 & 144) == 144)
-				return 1;
-		}
-		if ((tpos & 4) > 0)
-		{
-			if ((position1 & 3) == 3)
-				return 2;
-			if ((position1 & 288) == 288)
-				return 2;
-			if ((position1 & 80) == 80)
-				return 2;
-		}
-		if ((tpos & 8) > 0)
-		{
-			if ((position1 & 48) == 48)
-				return 3;
-			if ((position1 & 65) == 65)
-				return 3;
-		}
-		if ((tpos & 16) > 0)
-		{
-			if ((position1 & 40) == 40)
-				return 4;
-			if ((position1 & 130) == 130)
-				return 4;
-			if ((position1 & 257) == 257)
-				return 4;
-			if ((position1 & 68) == 68)
-				return 4;
-		}
-		if ((tpos & 32) > 0)
-		{
-			if ((position1 & 260) == 260)
-				return 5;
-			if ((position1 & 24) == 24)
-				return 5;
-		}
-		if ((tpos & 64) > 0)
-		{
-			if ((position1 & 384) == 384)
-				return 6;
-			if ((position1 & 9) == 9)
-				return 6;
-			if ((position1 & 20) == 20)
-				return 6;
-		}
-		if ((tpos & 128) > 0)
-		{
-			if ((position1 & 320) == 320)
-				return 7;
-			if ((position1 & 18) == 18)
-				return 7;
-		}
-		if ((tpos & 256) > 0)
-		{
-			if ((position1 & 192) == 192)
-				return 8;
-			if ((position1 & 17) == 17)
-				return 8;
-			if ((position1 & 36) == 36)
-				return 8;
-		}
-		short ret, maxscore = depth - 3;
+		npos = ~position2;
+		bool iswin = false;
+		short winblock;
+		if ((tpos & 1) == 0) 
+			if ((npos & 272) == 0 or (npos & 72) == 0 or (npos & 6) == 0){
+				iswin = true;
+				winblock = 1;
+			}
+		if ((tpos & 2) == 0)
+			if ((npos & 5) == 0 or (npos & 144) == 0){
+				iswin = true;
+				winblock = 2;
+			}
+		if ((tpos & 4) == 0)
+			if ((npos & 3) == 0 or (npos & 288) == 0 or (npos & 80) == 0){
+				iswin = true;
+				winblock = 4;
+			}
+		if ((tpos & 8) == 0)
+			if ((npos & 48) == 0 or (npos & 65) == 0){
+				if(iswin)
+					return -depth;
+				iswin = true;
+				winblock = 8;
+			}
+		if ((tpos & 32) == 0)
+			if ((npos & 260) == 0 or (npos & 24) == 0){
+				if(iswin)
+					return -depth;
+				iswin = true;
+				winblock = 32;
+			}
+		if ((tpos & 64) == 0)
+			if ((npos & 384) == 0 or (npos & 9) == 0 or (npos & 20) == 0){
+				if(iswin)
+					return -depth;
+				iswin = true;
+				winblock = 64;
+			}
+		if ((tpos & 128) == 0)
+			if ((npos & 320) == 0 or (npos & 18) == 0){
+				if(iswin)
+					return -depth;
+				iswin = true;
+				winblock = 128;
+			}
+		if ((tpos & 256) == 0)
+			if ((npos & 192) == 0 or (npos & 17) == 0 or (npos & 36) == 0){
+				if(iswin)
+					return -depth;
+				iswin = true;
+				winblock = 256;
+			}
 		depth--;
-		if ((tpos & 16) > 0)
+		if(depth == 0)
+			return 0;
+		if(iswin)
+			return minimax(depth, alpha, beta, position1 | winblock, position2, false);
+		short maxscore = depth - 3;
+		if(alpha > maxscore)
+			return alpha;
+		if ((tpos & 16) == 0)
 		{
 			short reschild = minimax(depth, alpha, beta, position1 | 16, position2, false);
 			if(reschild > maxscore)
-				return 4;
+				return reschild;
 			if(reschild > alpha){
 				if(beta <= reschild)
-					return 4;
+					return reschild;
+				alpha = reschild;
+			}
+		}
+		if ((tpos & 256) == 0)
+		{
+			short reschild = minimax(depth, alpha, beta, position1 | 256, position2, false);
+			if(reschild > maxscore)
+				return reschild;
+			if(reschild > alpha){
+				if(beta <= reschild)
+					return reschild;
+				alpha = reschild;
+			}
+		}
+		if ((tpos & 64) == 0)
+		{
+			short reschild = minimax(depth, alpha, beta, position1 | 64, position2, false);
+			if(reschild > maxscore)
+				return reschild;
+			if(reschild > alpha){
+				if(beta <= reschild)
+					return reschild;
+				alpha = reschild;
+			}
+		}
+		if ((tpos & 4) == 0)
+		{
+			short reschild = minimax(depth, alpha, beta, position1 | 4, position2, false);
+			if(reschild > maxscore)
+				return reschild;
+			if(reschild > alpha){
+				if(beta <= reschild)
+					return reschild;
+				alpha = reschild;
+			}
+		}
+		if ((tpos & 1) == 0)
+		{
+			short reschild = minimax(depth, alpha, beta, position1 | 1, position2, false);
+			if(reschild > maxscore)
+				return reschild;
+		}
+		return alpha;
+	}
+	else
+	{
+		npos = ~position1;
+		bool iswin = false;
+		short winblock;
+		if ((tpos & 1) == 0) 
+			if ((npos & 272) == 0 or (npos & 72) == 0 or (npos & 6) == 0){
+				iswin = true;
+				winblock = 1;
+			}
+		if ((tpos & 2) == 0)
+			if ((npos & 5) == 0 or (npos & 144) == 0){
+				iswin = true;
+				winblock = 2;
+			}
+		if ((tpos & 4) == 0)
+			if ((npos & 3) == 0 or (npos & 288) == 0 or (npos & 80) == 0){
+				if(iswin)
+					return depth;
+				iswin = true;
+				winblock = 4;
+			}
+		if ((tpos & 8) == 0)
+			if ((npos & 48) == 0 or (npos & 65) == 0){
+				if(iswin)
+					return depth;
+				iswin = true;
+				winblock = 8;
+			}
+		if ((tpos & 32) == 0)
+			if ((npos & 260) == 0 or (npos & 24) == 0){
+				if(iswin)
+					return depth;
+				iswin = true;
+				winblock = 32;
+			}
+		if ((tpos & 64) == 0)
+			if ((npos & 384) == 0 or (npos & 9) == 0 or (npos & 20) == 0){
+				if(iswin)
+					return depth;
+				iswin = true;
+				winblock = 64;
+			}
+		if ((tpos & 128) == 0)
+			if ((npos & 320) == 0 or (npos & 18) == 0){
+				if(iswin)
+					return depth;
+				iswin = true;
+				winblock = 128;
+			}
+		if ((tpos & 256) == 0)
+			if ((npos & 192) == 0 or (npos & 17) == 0 or (npos & 36) == 0){
+				if(iswin)
+					return depth;
+				iswin = true;
+				winblock = 256;
+			}
+		depth--;
+		if(iswin)
+			return minimax(depth, alpha, beta, position1, position2 | winblock, true);
+		short minscore = 3 - depth;
+		if(beta < minscore)
+			return beta;
+		if ((tpos & 16) == 0)
+		{
+			short reschild = minimax(depth, alpha, beta, position1, position2 | 16, true);
+			if(reschild < beta){
+				if(reschild <= alpha)
+					return reschild;
+				beta = reschild;
+			}
+		}
+		if ((tpos & 256) == 0)
+		{
+			short reschild = minimax(depth, alpha, beta, position1, position2 | 256, true);
+			if(reschild < minscore)
+				return reschild;
+			if(reschild < beta){
+				if(reschild <= alpha)
+					return reschild;
+				beta = reschild;
+			}
+		}
+		if ((tpos & 64) == 0)
+		{
+			short reschild = minimax(depth, alpha, beta, position1, position2 | 64, true);
+			if(reschild < minscore)
+				return reschild;
+			if(reschild < beta){
+				if(reschild <= alpha)
+					return reschild;
+				beta = reschild;
+			}
+		}
+		if ((tpos & 4) == 0)
+		{
+			short reschild = minimax(depth, alpha, beta, position1, position2 | 4, true);
+			if(reschild < minscore)
+				return reschild;
+			if(reschild < beta){
+				if(reschild <= alpha)
+					return reschild;
+				beta = reschild;
+			}
+		}
+		if ((tpos & 1) == 0)
+		{
+			short reschild = minimax(depth, alpha, beta, position1, position2 | 1, true);
+			if(reschild < minscore)
+				return reschild;
+		}
+		if ((tpos & 128) == 0)
+		{
+			short reschild = minimax(depth, alpha, beta, position1, position2 | 128, true);
+			if(reschild < minscore)
+				return reschild;
+			if(reschild < beta){
+				if(reschild <= alpha)
+					return reschild;
+				beta = reschild;
+			}
+		}
+		if ((tpos & 32) == 0)
+		{
+			short reschild = minimax(depth, alpha, beta, position1, position2 | 32, true);
+			if(reschild < minscore)
+				return reschild;
+		}
+		return beta;
+	}
+}
+
+short minimaxmain(short depth, short alpha, short beta, short position1, short position2, bool player)
+{
+	short tpos = (position1 | position2), npos; 
+	if (player)
+	{
+		npos = ~position1;
+		if ((tpos & 1) == 0) 
+			if ((npos & 272) == 0 or (npos & 72) == 0 or (npos & 6) == 0)
+				return 0;
+		if ((tpos & 4) == 0)
+			if ((npos & 3) == 0 or (npos & 288) == 0 or (npos & 80) == 0)
+				return 2;
+		if ((tpos & 8) == 0)
+			if ((npos & 48) == 0 or (npos & 65) == 0)
+				return 3;
+		if ((tpos & 32) == 0)
+			if ((npos & 260) == 0 or (npos & 24) == 0)
+				return 5;
+		if ((tpos & 64) == 0)
+			if ((npos & 384) == 0 or (npos & 9) == 0 or (npos & 20) == 0)
+				return 6;
+		if ((tpos & 128) == 0)
+			if ((npos & 320) == 0 or (npos & 18) == 0)
+				return 7;
+		npos = ~position2;
+		if ((tpos & 2) == 0)
+			if ((npos & 5) == 0 or (npos & 144) == 0)
+				return 1;
+		if ((tpos & 4) == 0)
+			if ((npos & 3) == 0 or (npos & 288) == 0 or (npos & 80) == 0)
+				return 2;
+		if ((tpos & 8) == 0)
+			if ((npos & 48) == 0 or (npos & 65) == 0)
+				return 3;
+		if ((tpos & 32) == 0)
+			if ((npos & 260) == 0 or (npos & 24) == 0)
+				return 5;
+		if ((tpos & 64) == 0)
+			if ((npos & 384) == 0 or (npos & 9) == 0 or (npos & 20) == 0)
+				return 6;
+		short ret, maxscore = depth - 3;
+		depth--;
+		if ((tpos & 16) == 0)
+		{
+			short reschild = minimax(depth, alpha, beta, position1 | 16, position2, false);
+			if(reschild > alpha){
 				alpha = reschild;
 				ret = 4;
 			}	
 		}
-		if ((tpos & 256) > 0)
+		if ((tpos & 256) == 0)
 		{
 			short reschild = minimax(depth, alpha, beta, position1 | 256, position2, false);
-			if(reschild > maxscore)
-				return 8;
 			if(reschild > alpha){
-				if(beta <= alpha)
-					return 8;
 				alpha = reschild;
 				ret = 8;
 			}
 		}
-		if ((tpos & 64) > 0)
+		if ((tpos & 64) == 0)
 		{
 			short reschild = minimax(depth, alpha, beta, position1 | 64, position2, false);
 			if(reschild > maxscore)
 				return 6;
 			if(reschild > alpha){
-				if(beta <= alpha)
-					return 6;
 				alpha = reschild;
 				ret = 6;
 			}
 		}
-		if ((tpos & 4) > 0)
+		if ((tpos & 4) == 0)
 		{
 			short reschild = minimax(depth, alpha, beta, position1 | 4, position2, false);
 			if(reschild > maxscore)
 				return 2;
 			if(reschild > alpha){
-				if(beta <= alpha)
-					return 2;
 				alpha = reschild;
 				ret = 2;
 			}
 		}
-		if ((tpos & 1) > 0)
+		if ((tpos & 1) == 0)
 		{
 			short reschild = minimax(depth, alpha, beta, position1 | 1, position2, false);
-			if(reschild > maxscore)
-				return 0;
 			if(reschild > alpha){
-				if(beta <= alpha)
-					return 0;
 				alpha = reschild;
 				ret = 0;
 			}
 		}
-		if ((tpos & 128) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 128, position2, false);
-			if(reschild > maxscore)
+		if ((tpos & 128) == 0)
+			if(minimax(depth, alpha, beta, position1 | 128, position2, false) > maxscore)
 				return 7;
-			if(reschild > alpha){
-				if(beta <= alpha)
-					return 7;
-				alpha = reschild;
-				ret = 7;
-			}
-		}
-		if ((tpos & 32) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 32, position2, false);
-			if(reschild > maxscore)
+		if ((tpos & 32) == 0)
+			if(minimax(depth, alpha, beta, position1 | 32, position2, false) > maxscore)
 				return 5;
-			if(reschild > alpha){
-				if(beta <= alpha)
-					return 5;
-				alpha = reschild;
-				ret = 5;
-			}
-		}
-		if ((tpos & 8) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 8, position2, false);
-			if(reschild > maxscore)
+		if ((tpos & 8) == 0)
+			if(minimax(depth, alpha, beta, position1 | 8, position2, false) > maxscore)
 				return 3;
-			if(reschild > alpha){
-				if(beta <= alpha)
-					return 3;
-				alpha = reschild;
-				ret = 3;
-			}
-		}
-		if ((tpos & 2) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1 | 2, position2, false);
-			if(reschild > maxscore)
+		if ((tpos & 2) == 0)
+			if(minimax(depth, alpha, beta, position1 | 2, position2, false) > maxscore)
 				return 1;
-			if(reschild > alpha){
-				if(beta <= alpha)
-					return 1;
-				alpha = reschild;
-				ret = 1;
-			}
-		}
 		return ret;
 	}
 	else
 	{ 
-		if ((tpos & 1) > 0) 
-		{
-			if ((position2 & 272) == 272)
+		npos = ~position2;
+		if ((tpos & 1) == 0) 
+			if ((npos & 272) == 0 or (npos & 72) == 0 or (npos & 6) == 0)
 				return 0;
-			if ((position2 & 72) == 72)
-				return 0;
-			if ((position2 & 6) == 6)
-				return 0;
-		}
-		if ((tpos & 2) > 0)
-		{
-			if ((position2 & 5) == 5)
+		if ((tpos & 2) == 0)
+			if ((npos & 5) == 0 or (npos & 144) == 0)
 				return 1;
-			if ((position2 & 144) == 144)
+		if ((tpos & 4) == 0)
+			if ((npos & 3) == 0 or (npos & 288) == 0 or (npos & 80) == 0)
+				return 2;
+		if ((tpos & 8) == 0)
+			if ((npos & 48) == 0 or (npos & 65) == 0)
+				return 3;
+		if ((tpos & 32) == 0)
+			if ((npos & 260) == 0 or (npos & 24) == 0)
+				return 5;
+		if ((tpos & 64) == 0)
+			if ((npos & 384) == 0 or (npos & 9) == 0 or (npos & 20) == 0)
+				return 6;
+		if ((tpos & 128) == 0)
+			if ((npos & 320) == 0 or (npos & 18) == 0)
+				return 7;
+		if ((tpos & 256) == 0)
+			if ((npos & 192) == 0 or (npos & 17) == 0 or (npos & 36) == 0)
+				return 8;
+		npos = ~position1;
+		if ((tpos & 1) == 0) 
+			if ((npos & 272) == 0 or (npos & 72) == 0 or (npos & 6) == 0)
+				return 0;
+		if ((tpos & 2) == 0)
+			if ((npos & 5) == 0 or (npos & 144) == 0)
 				return 1;
-		}
-		if ((tpos & 4) > 0)
-		{
-			if ((position2 & 3) == 3)
+		if ((tpos & 4) == 0)
+			if ((npos & 3) == 0 or (npos & 288) == 0 or (npos & 80) == 0)
 				return 2;
-			if ((position2 & 288) == 288)
-				return 2;
-			if ((position2 & 80) == 80)
-				return 2;
-		}
-		if ((tpos & 8) > 0)
-		{
-			if ((position2 & 48) == 48)
+		if ((tpos & 8) == 0)
+			if ((npos & 48) == 0 or (npos & 65) == 0)
 				return 3;
-			if ((position2 & 65) == 65)
-				return 3;
-		}
-		if ((tpos & 16) > 0)
-		{
-			if ((position2 & 40) == 40)
-				return 4;
-			if ((position2 & 130) == 130)
-				return 4;
-			if ((position2 & 257) == 257)
-				return 4;
-			if ((position2 & 68) == 68)
-				return 4;
-		}
-		if ((tpos & 32) > 0)
-		{
-			if ((position2 & 260) == 260)
+		if ((tpos & 32) == 0)
+			if ((npos & 260) == 0 or (npos & 24) == 0)
 				return 5;
-			if ((position2 & 24) == 24)
-				return 5;
-		}
-		if ((tpos & 64) > 0)
-		{
-			if ((position2 & 384) == 384)
+		if ((tpos & 64) == 0)
+			if ((npos & 384) == 0 or (npos & 9) == 0 or (npos & 20) == 0)
 				return 6;
-			if ((position2 & 9) == 9)
-				return 6;
-			if ((position2 & 20) == 20)
-				return 6;
-		}
-		if ((tpos & 128) > 0)
-		{
-			if ((position2 & 320) == 320)
+		if ((tpos & 128) == 0)
+			if ((npos & 320) == 0 or (npos & 18) == 0)
 				return 7;
-			if ((position2 & 18) == 18)
-				return 7;
-		}
-		if ((tpos & 256) > 0)
-		{
-			if ((position2 & 192) == 192)
+		if ((tpos & 256) == 0)
+			if ((npos & 192) == 0 or (npos & 17) == 0 or (npos & 36) == 0)
 				return 8;
-			if ((position2 & 17) == 17)
-				return 8;
-			if ((position2 & 36) == 36)
-				return 8;
-		}
-		short ret, minscore = 3 - depth;
+		short ret = -1, minscore = 3 - depth;
 		depth--;
-		if ((tpos & 16) > 0)
+		if ((tpos & 16) == 0)
 		{
 			short reschild = minimax(depth, alpha, beta, position1, position2 | 16, true);
-			if(reschild < minscore)
-				return 4;
 			if(reschild < beta){
-				if(reschild <= alpha)
-					return 4;
 				beta = reschild;
 				ret = 4;
 			}
 		}
-		if ((tpos & 256) > 0)
+		if ((tpos & 256) == 0)
 		{
 			short reschild = minimax(depth, alpha, beta, position1, position2 | 256, true);
 			if(reschild < minscore)
 				return 8;
 			if(reschild < beta){
-				if(reschild <= alpha)
-					return 8;
 				beta = reschild;
 				ret = 8;
 			}
 		}
-		if ((tpos & 64) > 0)
+		if ((tpos & 64) == 0)
 		{
 			short reschild = minimax(depth, alpha, beta, position1, position2 | 64, true);
 			if(reschild < minscore)
 				return 6;
 			if(reschild < beta){
-				if(reschild <= alpha)
-					return 6;
 				beta = reschild;
 				ret = 6;
 			}
 		}
-		if ((tpos & 4) > 0)
+		if ((tpos & 4) == 0)
 		{
 			short reschild = minimax(depth, alpha, beta, position1, position2 | 4, true);
 			if(reschild < minscore)
 				return 2;
 			if(reschild < beta){
-				if(reschild <= alpha)
-					return 2;
 				beta = reschild;
 				ret = 2;
 			}
 		}
-		if ((tpos & 1) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 1, true);
-			if(reschild < minscore)
+		if ((tpos & 1) == 0)
+			if(minimax(depth, alpha, beta, position1, position2 | 1, true) < minscore)
 				return 0;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return 0;
-				beta = reschild;
-				ret = 0;
-			}
-		}
-		if ((tpos & 128) > 0)
+		if ((tpos & 128) == 0)
 		{
 			short reschild = minimax(depth, alpha, beta, position1, position2 | 128, true);
 			if(reschild < minscore)
 				return 7;
 			if(reschild < beta){
-				if(reschild <= alpha)
-					return 7;
 				beta = reschild;
 				ret = 7;
 			}
 		}
-		if ((tpos & 32) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 32, true);
-			if(reschild < minscore)
+		if ((tpos & 32) == 0)
+			if(minimax(depth, alpha, beta, position1, position2 | 32, true) < minscore)
 				return 5;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return 5;
-				beta = reschild;
-				ret = 5;
-			}
-		}
-		if ((tpos & 8) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 8, true);
-			if(reschild < minscore)
-				return 3;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return 3;
-				beta = reschild;
-				ret = 3;
-			}
-		}
-		if ((tpos & 2) > 0)
-		{
-			short reschild = minimax(depth, alpha, beta, position1, position2 | 2, true);
-			if(reschild < minscore)
-				return 1;
-			if(reschild < beta){
-				if(reschild <= alpha)
-					return 1;
-				beta = reschild;
-				ret = 1;
-			}
-		}
 		return ret;
 	}
 }
 
 int main()
 {
+	// system("CLS");
 	for (;;)
 	{
 		short pos1 = 0, pos2 = 0;
@@ -872,7 +585,10 @@ int main()
 			cout << "Bot starts first" << endl;
 			for (short itmain = 0;; itmain++)
 			{
+				entry = 0;
 				short move1 = minimaxmain(9 - (itmain << 1), -100, 100, pos1, pos2, true);
+				//244
+				cout << entry << endl;
 				pos1 += (1 << move1);
 				if (checkwin(pos1, move1))
 				{
@@ -889,7 +605,7 @@ int main()
 				display(pos1, pos2);
 				short move2;
 				cin >> move2;
-				for (; move2 < 0 or move2 > 9 or (pos1 & (1 << (move2 - 1))) > 0 or (pos2 & (1 << (move2 - 1))) > 0;)
+				for (; move2 < 0 or move2 > 9 or ((pos1 | pos2) & (1 << (move2 - 1))) > 0;)
 					cin >> move2;
 				pos2 += (1 << (move2 - 1));
 			}
@@ -902,7 +618,7 @@ int main()
 				display(pos1, pos2);
 				short move2;
 				cin >> move2;
-				for (; move2 < 0 or move2 > 9 or (pos1 & (1 << (move2 - 1))) > 0 or (pos2 & (1 << (move2 - 1))) > 0;)
+				for (; move2 < 0 or move2 > 9 or ((pos1 | pos2) & (1 << (move2 - 1))) > 0;)
 					cin >> move2;
 				pos1 += (1 << (move2 - 1));
 				if (itmain == 4)
@@ -911,7 +627,9 @@ int main()
 					cout << "Draw" << endl;
 					break;
 				}
+				entry = 0;
 				short move1 = minimaxmain(8 - (itmain << 1), -100, 100, pos1, pos2, false);
+				cout << entry << endl;
 				pos2 += (1 << move1);
 				if (checkwin(pos2, move1) == 1)
 				{
